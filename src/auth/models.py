@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+import bcrypt
+from pydantic import BaseModel, ConfigDict
 from sqlalchemy import String
 from src.database.core import Base
 from sqlalchemy.orm import Mapped, mapped_column
@@ -13,9 +14,18 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True)
     password_hash: Mapped[str] = mapped_column(String(255))
 
-    def set_password(self, password: str):
-        # TODO: generate hash
-        self.password_hash = password
+    @property
+    def token(self):
+        # TODO: generate jwt token
+        return "a sample token"
+
+    def set_password(self, password: str) -> None:
+        pw = password.encode()
+        salt = bcrypt.gensalt()
+        self.password_hash = bcrypt.hashpw(pw, salt).decode()
+
+    def verify_password(self, password: str) -> bool:
+        return bcrypt.checkpw(password.encode(), self.password_hash.encode())
 
 
 class UserRead(DBBaseModel):
@@ -28,3 +38,10 @@ class UserCreateRequest(BaseModel):
     full_name: str
     email: str
     password: str
+
+
+class TokenResponse(BaseModel):
+    token: str
+    user: UserRead
+
+    model_config = ConfigDict(from_attributes=True)

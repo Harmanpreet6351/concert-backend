@@ -7,6 +7,18 @@ from src.auth.models import User, UserCreateRequest
 
 
 async def create_user(db: AsyncSession, *, data: UserCreateRequest) -> User:
+    """Creates a user in database
+
+    Args:
+        db (AsyncSession): Asynchronous Sqlalchemy database session object
+        data (UserCreateRequest): UserCreateRequest pydantic schema
+
+    Raises:
+        HTTPException: Raise exception if the user with same email already exists
+
+    Returns:
+        User: returns newly created user
+    """
     result = await db.execute(
         select(User).where(func.lower(User.email) == func.lower(data.email))
     )
@@ -33,6 +45,19 @@ async def create_user(db: AsyncSession, *, data: UserCreateRequest) -> User:
 
 
 async def authenticate_user(db: AsyncSession, *, email: str, password: str) -> User:
+    """Get a user from DB and verifies password
+
+    Args:
+        db (AsyncSession): Asynchronous Sqlalchemy database session object
+        email (str): email of the targer user
+        password (str): password of the target user
+
+    Raises:
+        HTTPException: If the user is not authentic, HTTPException is raised
+
+    Returns:
+        User: Returns the user if authentic
+    """
     result = await db.execute(select(User).where(User.email == email))
 
     user_obj = result.scalars().one_or_none()

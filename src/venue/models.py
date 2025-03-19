@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy import TEXT, String
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -14,16 +14,19 @@ class Venue(Base):
     capacity: Mapped[int]
 
 
-
 class VenueRead(DBBaseModel):
-    
     name: str
     location: str
     capacity: int
-    
-    
+
+
 class VenueCreateRequest(BaseModel):
-    
     name: str
     location: str
     capacity: str
+
+
+class PaginatedVenueRead(BaseModel):
+    page: int
+    total_pages: int
+    data: list[VenueRead] = Field([])

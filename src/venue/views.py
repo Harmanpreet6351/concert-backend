@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 
-from src.dependencies import AsyncSessionDep
-from src.venue.models import PaginatedVenueRead, VenueCreateRequest, VenueRead
-from src.venue.service import get_venues_paginated, create_venue as create_venue_db
+from src.database.operations import db_get_item_by_filter_spec
+from src.dependencies import AsyncSessionDep, PaginationParamsDep
+from src.venue.models import PaginatedVenueRead, Venue, VenueCreateRequest, VenueRead
+from src.venue.service import create_venue as create_venue_db
 
 
 venue_router = APIRouter(tags=["Venues"])
@@ -14,5 +15,15 @@ async def create_venue(db: AsyncSessionDep, data: VenueCreateRequest):
 
 
 @venue_router.get("/venues", response_model=PaginatedVenueRead)
-async def get_paginated_venues(db: AsyncSessionDep):
-    return await get_venues_paginated(db)
+async def get_paginated_venues(
+    db: AsyncSessionDep,
+    page_data: PaginationParamsDep
+):
+    return await db_get_item_by_filter_spec(
+        db,
+        Venue,
+        pagination_data={
+            "page": page_data.page,
+            "per_page": page_data.per_page
+        }
+    )

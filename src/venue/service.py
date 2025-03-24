@@ -25,11 +25,3 @@ async def create_venue(db: AsyncSession, data: VenueCreateRequest) -> Venue:
     await db.refresh(obj)
 
     return obj
-
-
-async def get_venues_paginated(
-    db: AsyncSession, *, page: int = 1, per_page: int = 10
-) -> dict[str, int | list[Venue]]:
-    stmt = select(Venue)
-
-    return await paginate(db, stmt)

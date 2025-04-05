@@ -10,6 +10,7 @@ from src.models import DBBaseModel
 if TYPE_CHECKING:
     from src.venue.models import Venue
 
+
 class User(Base):
     __tablename__ = "users"
 

@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from src.database.core import AsyncSessionLocal
 from sqlalchemy.ext.asyncio import AsyncSession
 
+
 class PaginationParams(BaseModel):
     page: int = Field(..., description="Page number")
     per_page: int = Field(10, description="Number of itmes to show per page")

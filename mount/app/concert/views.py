@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 
-from src.concert.models import Concert, ConcertCreate, ConcertRead
-from src.concert.services import add_concert_to_venue as add_concert_to_venue_db
-from src.database.operations import db_create_item
-from src.dependencies import AsyncSessionDep
+from app.concert.models import Concert, ConcertCreate, ConcertRead
+from app.concert.services import add_concert_to_venue as add_concert_to_venue_db
+from app.database.operations import db_create_item
+from app.dependencies import AsyncSessionDep
 
 
 concert_router = APIRouter(tags=["Concerts"])

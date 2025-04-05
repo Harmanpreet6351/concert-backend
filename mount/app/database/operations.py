@@ -5,8 +5,8 @@ from sqlalchemy import ColumnElement, select, asc, desc
 from sqlalchemy.orm import InstrumentedAttribute, joinedload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.database.core import Base
-from src.database.ext import paginate as paginate_query
+from app.database.core import Base
+from app.database.ext import paginate as paginate_query
 
 ModelType = TypeVar("ModelType", bound=Base)
 

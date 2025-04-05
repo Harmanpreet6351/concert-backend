@@ -2,21 +2,21 @@ from typing import TYPE_CHECKING
 import bcrypt
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy import String, or_
-from src.database.core import Base
+from app.database.core import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.models import DBBaseModel
+from app.models import DBBaseModel
 
 if TYPE_CHECKING:
-    from src.venue.models import Venue
+    from app.venue.models import Venue
 
 
 class User(Base):
     __tablename__ = "users"
 
-    full_name: Mapped[str] = mapped_column(String(255))
-    email: Mapped[str] = mapped_column(String(255), unique=True)
-    password_hash: Mapped[str] = mapped_column(String(255))
+    full_name: Mapped[str] = mapped_column(String)
+    email: Mapped[str] = mapped_column(String, unique=True)
+    password_hash: Mapped[str] = mapped_column(String)
 
     @property
     def token(self):

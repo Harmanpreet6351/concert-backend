@@ -3,7 +3,7 @@ from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import status
 
-from src.auth.models import User, UserCreateRequest
+from app.auth.models import User, UserCreateRequest
 
 
 async def create_user(db: AsyncSession, *, data: UserCreateRequest) -> User:

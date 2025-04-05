@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from src.exceptions import ExceptionHandlerMiddleware
+from app.exceptions import ExceptionHandlerMiddleware
 from .router import api_router_v1
 
 app_description = """

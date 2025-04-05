@@ -3,8 +3,8 @@ from fastapi import HTTPException
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.database.ext import paginate
-from src.venue.models import Venue, VenueCreateRequest
+from app.database.ext import paginate
+from app.venue.models import Venue, VenueCreateRequest
 
 
 async def create_venue(db: AsyncSession, data: VenueCreateRequest) -> Venue:

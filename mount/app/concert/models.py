@@ -2,22 +2,22 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 from pydantic import BaseModel, Field
 from sqlalchemy import TIMESTAMP, ForeignKey, Numeric, String
-from src.database.core import Base
+from app.database.core import Base
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.models import DBBaseModel
-from src.venue.models import VenueRead
+from app.models import DBBaseModel
+from app.venue.models import VenueRead
 
 if TYPE_CHECKING:
-    from src.venue.models import Venue
+    from app.venue.models import Venue
 
 
 class Concert(Base):
     __tablename__ = "concerts"
 
-    title: Mapped[str] = mapped_column(String(255))
-    artist: Mapped[str] = mapped_column(String(255))
+    title: Mapped[str] = mapped_column(String)
+    artist: Mapped[str] = mapped_column(String)
     venue_id: Mapped[int | None] = mapped_column(
         ForeignKey("venues.id", name="concert_venue_fk")
     )

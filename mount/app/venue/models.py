@@ -3,17 +3,17 @@ from pydantic import BaseModel, Field
 from sqlalchemy import TEXT, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.database.core import Base
-from src.models import DBBaseModel
+from app.database.core import Base
+from app.models import DBBaseModel
 
 if TYPE_CHECKING:
-    from src.concert.models import Concert
+    from app.concert.models import Concert
 
 
 class Venue(Base):
     __tablename__ = "venues"
 
-    name: Mapped[str] = mapped_column(String(255))
+    name: Mapped[str] = mapped_column(String)
     location: Mapped[str] = mapped_column(TEXT)
     capacity: Mapped[int]
 

@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 
-from src.database.operations import db_get_item_by_filter_spec
-from src.dependencies import AsyncSessionDep, PaginationParamsDep
-from src.models import PaginatedResponse
-from src.venue.models import Venue, VenueCreateRequest, VenueRead
-from src.venue.services import create_venue as create_venue_db
+from app.database.operations import db_get_item_by_filter_spec
+from app.dependencies import AsyncSessionDep, PaginationParamsDep
+from app.models import PaginatedResponse
+from app.venue.models import Venue, VenueCreateRequest, VenueRead
+from app.venue.services import create_venue as create_venue_db
 
 
 venue_router = APIRouter(tags=["Venues"])

@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import Depends, Query
 from pydantic import BaseModel, Field
-from src.database.core import AsyncSessionLocal
+from app.database.core import AsyncSessionLocal
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

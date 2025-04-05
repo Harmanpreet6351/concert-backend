@@ -1,9 +1,9 @@
 from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.concert.models import Concert
-from src.database.operations import QueryDB
-from src.venue.models import Venue
+from app.concert.models import Concert
+from app.database.operations import QueryDB
+from app.venue.models import Venue
 
 
 async def add_concert_to_venue(

@@ -2,10 +2,10 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
-from src.auth.models import TokenResponse, UserCreateRequest, UserRead
-from src.auth.services import authenticate_user, create_user
-from src.dependencies import AsyncSessionDep
-from src.exceptions import HTTPExceptionResponseModel
+from app.auth.models import TokenResponse, UserCreateRequest, UserRead
+from app.auth.services import authenticate_user, create_user
+from app.dependencies import AsyncSessionDep
+from app.exceptions import HTTPExceptionResponseModel
 
 
 auth_router = APIRouter(tags=["Auth"])

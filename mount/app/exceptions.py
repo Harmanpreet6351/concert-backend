@@ -2,7 +2,7 @@ from typing import Awaitable, Callable
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import Response
 
 

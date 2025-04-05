@@ -1,4 +1,4 @@
-from typing import Any, Generic, Literal, Self, Sequence, Type, TypedDict, TypeVar, cast
+from typing import Any, Generic, Literal, Sequence, Type, TypedDict, TypeVar, cast
 
 from fastapi import HTTPException, status
 from sqlalchemy import ColumnElement, select, asc, desc
@@ -71,7 +71,7 @@ async def db_get_item_by_filter_spec(
 
     result = await db.execute(stmt)
 
-    if many == False:
+    if not many:
         obj = result.scalar_one_or_none()
 
         if obj is None:

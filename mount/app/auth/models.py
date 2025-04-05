@@ -1,14 +1,10 @@
-from typing import TYPE_CHECKING
 import bcrypt
 from pydantic import BaseModel, ConfigDict
-from sqlalchemy import String, or_
+from sqlalchemy import String
 from app.database.core import Base
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models import DBBaseModel
-
-if TYPE_CHECKING:
-    from app.venue.models import Venue
 
 
 class User(Base):

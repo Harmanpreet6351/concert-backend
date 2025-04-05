@@ -1,9 +1,5 @@
-from typing import cast
-from fastapi import HTTPException
-from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.database.ext import paginate
 from app.venue.models import Venue, VenueCreateRequest
 from app.database.operations import QueryExecutor
 
@@ -28,7 +24,9 @@ async def create_venue(db: AsyncSession, data: VenueCreateRequest) -> Venue:
     return obj
 
 
-async def get_venues_paginated(db: AsyncSession, page: int = 1, per_page: int = 10) -> dict:
+async def get_venues_paginated(
+    db: AsyncSession, page: int = 1, per_page: int = 10
+) -> dict:
     """Get all venues in paginated form
 
     Args:
@@ -39,14 +37,8 @@ async def get_venues_paginated(db: AsyncSession, page: int = 1, per_page: int = 
     Returns:
         dict: Dictionary with Paginated Data
     """
-    data = await QueryExecutor[Venue](
-        Venue
-    ).paginate(
-        db,
-        pagination_data={
-            "page": page,
-            "per_page": per_page
-        }
+    data = await QueryExecutor[Venue](Venue).paginate(
+        db, pagination_data={"page": page, "per_page": per_page}
     )
 
     return data

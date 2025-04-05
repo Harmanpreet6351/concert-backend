@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 from app.auth.models import TokenResponse, UserCreateRequest, UserRead
-from app.auth.services import authenticate_user, create_user
+import app.auth.services as auth_service
 from app.dependencies import AsyncSessionDep
 from app.exceptions import HTTPExceptionResponseModel
 
@@ -35,7 +35,7 @@ async def register_user(db: AsyncSessionDep, data: UserCreateRequest):
     - `200 OK`: User registered successfully.
     - `400 Bad Request`: Username already exists or invalid input.
     """
-    return await create_user(db, data=data)
+    return await auth_service.create_user(db, data=data)
 
 
 @auth_router.post(
@@ -49,7 +49,7 @@ async def register_user(db: AsyncSessionDep, data: UserCreateRequest):
 async def get_token(
     db: AsyncSessionDep, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
 ):
-    user_obj = await authenticate_user(
+    user_obj = await auth_service.authenticate_user(
         db=db, email=form_data.username, password=form_data.password
     )
 

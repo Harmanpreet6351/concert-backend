@@ -86,7 +86,7 @@ async def db_get_item_by_filter_spec(
         return result.scalars().all()
 
 
-class QueryDB(Generic[ModelType]):
+class QueryExecutor(Generic[ModelType]):
     def __init__(
         self,
         model: Type[ModelType],

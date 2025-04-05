@@ -2,18 +2,18 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.concert.models import Concert
-from app.database.operations import QueryDB
+from app.database.operations import QueryExecutor
 from app.venue.models import Venue
 
 
 async def add_concert_to_venue(
     db: AsyncSession, concert_id: int, venue_id: int
 ) -> Concert:
-    concert_obj = await QueryDB[Concert](
+    concert_obj = await QueryExecutor[Concert](
         Concert, filter_spec=[("id", "eq", concert_id)]
     ).get_one_or_404(db)
 
-    venue_obj = await QueryDB[Venue](
+    venue_obj = await QueryExecutor[Venue](
         Venue, filter_spec=[("id", "eq", venue_id)]
     ).get_one_or_404(db)
 

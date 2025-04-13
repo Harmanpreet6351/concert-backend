@@ -163,7 +163,7 @@ class QueryExecutor(Generic[ModelType]):
         return cast(list[ModelType], result.scalars().all())
 
 
-async def db_create_item(
+async def create_item_from_json(
     db: AsyncSession, model: Type[ModelType], data: dict
 ) -> ModelType:
     obj = model()

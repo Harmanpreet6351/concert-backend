@@ -33,13 +33,14 @@ CREATE TABLE Tickets (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Bookings (
-    booking_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
-    ticket_id INT REFERENCES Tickets(ticket_id) ON DELETE CASCADE,
-    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(20) CHECK (status IN ('pending', 'confirmed', 'canceled')) DEFAULT 'pending'
-);
+-- It is not required for now
+-- CREATE TABLE Bookings (
+--     booking_id SERIAL PRIMARY KEY,
+--     user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
+--     ticket_id INT REFERENCES Tickets(ticket_id) ON DELETE CASCADE,
+--     booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     status VARCHAR(20) CHECK (status IN ('pending', 'confirmed', 'canceled')) DEFAULT 'pending'
+-- );
 
 CREATE TABLE Payments (
     payment_id SERIAL PRIMARY KEY,

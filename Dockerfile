@@ -6,19 +6,19 @@ ENV SCRIPTS_PATH=/scripts
 WORKDIR /mount
 
 RUN apt update -y && \
-    apt -y install bash gcc
+    apt -y install bash gcc dos2unix
 
 COPY mount/ .
 
-COPY requirements.txt /
-
 COPY scripts/ /scripts/
+
+RUN dos2unix /scripts/*
 
 ENV PYTHONUNBUFFERED=1
 
 RUN python -m pip install --upgrade pip
 
-RUN pip install --no-cache-dir -r /requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
 

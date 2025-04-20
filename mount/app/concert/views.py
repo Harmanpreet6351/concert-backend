@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from app.concert.models import Concert, ConcertCreate, ConcertRead
 from app.concert.services import add_concert_to_venue as add_concert_to_venue_db
 from app.database.operations import create_item_from_json
-from app.dependencies import AsyncSessionDep
+from app.database.dependencies import AsyncSessionDep
 
 
 concert_router = APIRouter(tags=["Concerts"])

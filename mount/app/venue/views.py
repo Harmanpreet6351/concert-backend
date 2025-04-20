@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.dependencies import AsyncSessionDep, PaginationParamsDep
+from app.database.dependencies import AsyncSessionDep, PaginationParamsDep
 from app.models import PaginatedResponse
 from app.venue.models import VenueCreateRequest, VenueRead
 

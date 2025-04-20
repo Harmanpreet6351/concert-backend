@@ -1,5 +1,7 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
+from app.database.core import get_db_engine
 from app.exceptions import ExceptionHandlerMiddleware
 from .router import api_router_v1
 
@@ -16,8 +18,15 @@ Built with **FastAPI** for high performance and scalability.
 
 """
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    app.state.db_pool = get_db_engine()
+    yield
+    await app.state.db_pool.dispose()
+
+
 app = FastAPI(
-    title="Concert Ticket Booking System API 🎟️🎶", description=app_description
+    title="Concert Ticket Booking System API 🎟️🎶", description=app_description, lifespan=lifespan
 )
 
 

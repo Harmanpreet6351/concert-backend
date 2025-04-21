@@ -4,7 +4,7 @@ from sqlalchemy import TEXT, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.core import Base
-from app.models import DBBaseModel
+from app.database.models import DBBaseModel
 
 if TYPE_CHECKING:
     from app.concert.models import Concert

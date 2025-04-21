@@ -6,7 +6,7 @@ from app.database.core import Base
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models import DBBaseModel
+from app.database.models import DBBaseModel
 from app.venue.models import VenueRead
 
 if TYPE_CHECKING:

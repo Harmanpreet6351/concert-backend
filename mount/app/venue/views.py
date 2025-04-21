@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.database.dependencies import AsyncSessionDep, PaginationParamsDep
-from app.models import PaginatedResponse
+from app.database.models import PaginatedResponse
 from app.venue.models import VenueCreateRequest, VenueRead
 
 import app.venue.services as venue_service

@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import status
@@ -27,7 +27,8 @@ async def create_user(db: AsyncSession, *, data: UserCreateRequest) -> User:
 
     if existing_user_obj is not None:
         raise HTTPException(
-            status_code=500, detail=f"User with email={data.email} already exists"
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"User with email={data.email} already exists"
         )
 
     user_obj = User()

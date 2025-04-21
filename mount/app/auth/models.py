@@ -1,10 +1,13 @@
+from datetime import datetime, timedelta, timezone
 import bcrypt
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy import String
+from app.config import get_settings
 from app.database.core import Base
 from sqlalchemy.orm import Mapped, mapped_column
+from jose import jwt
 
-from app.models import DBBaseModel
+from app.database.models import DBBaseModel
 
 
 class User(Base):
@@ -15,9 +18,17 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String)
 
     @property
-    def token(self):
-        # TODO: generate jwt token
-        return "a sample token"
+    def token(self) -> str:
+
+        payload = {
+            "sub": str(self.id),
+            "exp": datetime.now(timezone.utc) + timedelta(minutes=30)
+        }
+
+        return jwt.encode(
+            payload,
+            get_settings().secret_key,
+        )
 
     def set_password(self, password: str) -> None:
         pw = password.encode()
